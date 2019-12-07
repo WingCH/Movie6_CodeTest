@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.black,
+        accentColor: Colors.white,
       ),
       home: BottomNavigation(),
     );
@@ -33,16 +34,17 @@ class _BottomNavigationState extends State<BottomNavigation> {
         centerTitle: true,
         title: Text('電影'),
         leading: IconButton(
-          icon: Icon(FontAwesomeIcons.qrcode, color: Colors.white),
+          icon: Icon(FontAwesomeIcons.qrcode,
+              color: Theme.of(context).accentColor),
           onPressed: null,
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
+            icon: Icon(Icons.search, color: Theme.of(context).accentColor),
             onPressed: null,
           ),
           IconButton(
-            icon: Icon(Icons.border_left, color: Colors.white),
+            icon: Icon(Icons.border_left, color: Theme.of(context).accentColor),
             onPressed: null,
           ),
         ],
