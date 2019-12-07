@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,7 +30,22 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('電影'),
+        leading: IconButton(
+          icon: Icon(FontAwesomeIcons.qrcode, color: Colors.white),
+          onPressed: null,
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.white),
+            onPressed: null,
+          ),
+          IconButton(
+            icon: Icon(Icons.border_left, color: Colors.white),
+            onPressed: null,
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.black,
@@ -39,7 +55,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
           //https://stackoverflow.com/a/52182628/5588637
           showSelectedLabels: false,
           showUnselectedLabels: false,
-
           currentIndex: _currentIndex,
           items: [
             BottomNavigationBarItem(
