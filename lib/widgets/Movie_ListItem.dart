@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:movie6_code_test/models/movies.dart';
 
 // ignore: camel_case_types
 class MovieListItem extends StatelessWidget {
-  final int id;
+  final Movies movie;
 
-  const MovieListItem(this.id, {Key key}) : super(key: key);
+  const MovieListItem(this.movie, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +17,17 @@ class MovieListItem extends StatelessWidget {
       child: Row(
         children: <Widget>[
           _MovieListImage(
-              'https://storage.hkmovie6.com/prod/movie/movies_50517-2019-10-24-050523046.jpg'),
+              movie.thumbnail),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: _MovieListRating(3.9),
+            child: _MovieListRating((movie.rating != null ? movie.rating:0) /100),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('神探白朗：福比利大宅謀殺案', style: TextStyle(color: Colors.white)),
-              _MovieLikeAndComment(1113, 387),
-              _MovieListDate('Thu 28 Nov 2019 00:00:00')
+              Text(movie.name, style: TextStyle(color: Colors.white)),
+              _MovieLikeAndComment(movie.favCount, movie.commentCount),
+              _MovieListDate(movie.openDate)
             ],
           )
         ],
