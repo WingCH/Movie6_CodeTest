@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movie6_code_test/pages/EmptyPage.dart';
+import 'package:movie6_code_test/pages/MovieList.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,6 +28,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   //init page is 1
   int _currentIndex = 1;
+  List<Widget> pages = [EmptyPage(), MovieList(), EmptyPage(), EmptyPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +93,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               title: Text('Empty'))
         ],
       ),
-      body: Text('data'),
+      body: pages[_currentIndex],
     );
   }
 }
