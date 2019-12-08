@@ -50,46 +50,47 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.black,
-          type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
 
-          //remove title of BottomNavigationBarItem
-          //https://stackoverflow.com/a/52182628/5588637
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.lens,
-                  color: _currentIndex == 0 ? Colors.white : Colors.grey,
-                ),
-                title: Text('Empty')),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.local_movies,
-                  color: _currentIndex == 1 ? Colors.white : Colors.grey,
-                ),
-                title: Text('Movie')),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.lens,
-                  color: _currentIndex == 2 ? Colors.white : Colors.grey,
-                ),
-                title: Text('Empty')),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.lens,
-                  color: _currentIndex == 3 ? Colors.white : Colors.grey,
-                ),
-                title: Text('Empty'))
-          ],
-      onTap: (int index){
-            setState(() {
-              _currentIndex = index;
-            });
-      },),
-        body: Text('data'),
+        //remove title of BottomNavigationBarItem
+        //https://stackoverflow.com/a/52182628/5588637
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.lens,
+                color: _currentIndex == 0 ? Colors.white : Colors.grey,
+              ),
+              title: Text('Empty')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.local_movies,
+                color: _currentIndex == 1 ? Colors.white : Colors.grey,
+              ),
+              title: Text('Movie')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.lens,
+                color: _currentIndex == 2 ? Colors.white : Colors.grey,
+              ),
+              title: Text('Empty')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.lens,
+                color: _currentIndex == 3 ? Colors.white : Colors.grey,
+              ),
+              title: Text('Empty'))
+        ],
+      ),
+      body: Text('data'),
     );
   }
 }
