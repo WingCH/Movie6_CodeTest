@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: camel_case_types
 class MovieListItem extends StatelessWidget {
@@ -9,16 +10,87 @@ class MovieListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        _MovieListImage(
-            'https://storage.hkmovie6.com/prod/movie/movies_50517-2019-10-24-050523046.jpg'),
-        _MovieListRating(3.9),
-      ],
+    return Container(
+      color: Colors.black,
+      child: Row(
+        children: <Widget>[
+          _MovieListImage(
+              'https://storage.hkmovie6.com/prod/movie/movies_50517-2019-10-24-050523046.jpg'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _MovieListRating(3.9),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('神探白朗：福比利大宅謀殺案', style: TextStyle(color: Colors.white)),
+              _MovieLikeAndComment(1113,387),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
 
+class _MovieLikeAndComment extends StatelessWidget {
+  final int like;
+  final int comment;
+
+  const _MovieLikeAndComment(
+    this.like,
+    this.comment, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(
+            children: <Widget>[
+              Icon(
+                FontAwesomeIcons.heart,
+                color: Colors.white,
+                size: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.0),
+              ),
+              Text('$like',
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromRGBO(253, 220, 11, 1)))
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(
+            children: <Widget>[
+              Icon(
+                FontAwesomeIcons.commentAlt,
+                color: Colors.white,
+                size: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.0),
+              ),
+              Text('$comment',
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromRGBO(253, 220, 11, 1)))
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class _MovieListImage extends StatelessWidget {
   final String url;
@@ -41,9 +113,9 @@ class _MovieListRating extends StatelessWidget {
   final double rating;
 
   const _MovieListRating(
-      this.rating, {
-        Key key,
-      }) : super(key: key);
+    this.rating, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +124,8 @@ class _MovieListRating extends StatelessWidget {
         Text(
           '$rating',
           style: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.w800,
+              fontSize: 40,
+              fontWeight: FontWeight.w600,
               color: Color.fromRGBO(253, 220, 11, 1)),
         ),
         RatingBar(
