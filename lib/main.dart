@@ -83,7 +83,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   color: _currentIndex == 3 ? Colors.white : Colors.grey,
                 ),
                 title: Text('Empty'))
-          ]),
+          ],
+      onTap: (int index){
+            setState(() {
+              _currentIndex = index;
+            });
+      },),
+        body: Text('data'),
     );
   }
 }
