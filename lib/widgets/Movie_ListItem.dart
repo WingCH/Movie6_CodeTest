@@ -35,22 +35,56 @@ class MovieListItem extends StatelessWidget {
   }
 }
 
-class _MovieListDate extends StatelessWidget {
-  final String date;
-  const _MovieListDate(this.date,{
+class _MovieListImage extends StatelessWidget {
+  final String url;
+
+  _MovieListImage(this.url, {Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: 70.0,
+        child: Image(
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+          image: NetworkImage(url),
+        ));
+  }
+}
+
+class _MovieListRating extends StatelessWidget {
+  final double rating;
+
+  const _MovieListRating(
+    this.rating, {
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //https://stackoverflow.com/a/25256121/5588637
-    DateFormat format = new DateFormat("EEE dd MMM yyyy hh:mm:ss");
-
-    var displayDate = DateFormat("yyyy年M月dd日").format(format.parse(date));
-
-    return Text(
-      '$displayDate',
-      style: TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w600),
+    return Column(
+      children: <Widget>[
+        Text(
+          '$rating',
+          style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w600,
+              color: Color.fromRGBO(253, 220, 11, 1)),
+        ),
+        RatingBar(
+          itemSize: 50 / 5,
+          initialRating: rating,
+          direction: Axis.horizontal,
+          allowHalfRating: true,
+          ignoreGestures: true,
+          itemCount: 5,
+          itemBuilder: (context, _) => Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
+          onRatingUpdate: (double value) {},
+        )
+      ],
     );
   }
 }
@@ -114,56 +148,25 @@ class _MovieLikeAndComment extends StatelessWidget {
   }
 }
 
-class _MovieListImage extends StatelessWidget {
-  final String url;
+class _MovieListDate extends StatelessWidget {
+  final String date;
 
-  _MovieListImage(this.url, {Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        width: 70.0,
-        child: Image(
-          fit: BoxFit.cover,
-          alignment: Alignment.center,
-          image: NetworkImage(url),
-        ));
-  }
-}
-
-class _MovieListRating extends StatelessWidget {
-  final double rating;
-
-  const _MovieListRating(
-    this.rating, {
+  const _MovieListDate(
+    this.date, {
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(
-          '$rating',
-          style: TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w600,
-              color: Color.fromRGBO(253, 220, 11, 1)),
-        ),
-        RatingBar(
-          itemSize: 50 / 5,
-          initialRating: rating,
-          direction: Axis.horizontal,
-          allowHalfRating: true,
-          ignoreGestures: true,
-          itemCount: 5,
-          itemBuilder: (context, _) => Icon(
-            Icons.star,
-            color: Colors.amber,
-          ),
-          onRatingUpdate: (double value) {},
-        )
-      ],
+    //https://stackoverflow.com/a/25256121/5588637
+    DateFormat format = new DateFormat("EEE dd MMM yyyy hh:mm:ss");
+
+    var displayDate = DateFormat("yyyy年M月dd日").format(format.parse(date));
+
+    return Text(
+      '$displayDate',
+      style: TextStyle(
+          color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w600),
     );
   }
 }
