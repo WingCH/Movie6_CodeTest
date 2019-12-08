@@ -11,6 +11,7 @@ class _MovieListState extends State<MovieList> {
   Widget build(BuildContext context) {
     return ListView.separated(
         separatorBuilder: (context, index) => Divider(
+              height: 1,
               color: Colors.black,
             ),
         itemCount: 20,
