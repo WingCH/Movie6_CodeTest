@@ -13,23 +13,26 @@ class MovieListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       color: Colors.black,
       child: Row(
         children: <Widget>[
-          _MovieListImage(
-              movie.thumbnail),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _MovieListRating((movie.rating != null ? movie.rating:0) /100),
+          _MovieListImage(movie.thumbnail),
+          SizedBox(
+            width: 100,
+            child: _MovieListRating(
+                (movie.rating != null ? movie.rating : 0) / 100),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              //TODO: title太長會出框 overflowed
-              Text(movie.name, style: TextStyle(color: Colors.white)),
-              _MovieLikeAndComment(movie.favCount, movie.commentCount),
-              _MovieListDate(movie.openDate)
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                //TODO: title太長會出框 overflowed
+                Text(movie.name, style: TextStyle(color: Colors.white)),
+                _MovieLikeAndComment(movie.favCount, movie.commentCount),
+                _MovieListDate(movie.openDate)
+              ],
+            ),
           )
         ],
       ),
@@ -64,29 +67,32 @@ class _MovieListRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(
-          '$rating',
-          style: TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w600,
-              color: Color.fromRGBO(253, 220, 11, 1)),
-        ),
-        RatingBar(
-          itemSize: 50 / 5,
-          initialRating: rating,
-          direction: Axis.horizontal,
-          allowHalfRating: true,
-          ignoreGestures: true,
-          itemCount: 5,
-          itemBuilder: (context, _) => Icon(
-            Icons.star,
-            color: Colors.amber,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: <Widget>[
+          Text(
+            '$rating',
+            style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w600,
+                color: Color.fromRGBO(253, 220, 11, 1)),
           ),
-          onRatingUpdate: (double value) {},
-        )
-      ],
+          RatingBar(
+            itemSize: 50 / 5,
+            initialRating: rating,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            ignoreGestures: true,
+            itemCount: 5,
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (double value) {},
+          )
+        ],
+      ),
     );
   }
 }
