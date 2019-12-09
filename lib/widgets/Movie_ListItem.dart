@@ -17,7 +17,7 @@ class MovieListItem extends StatelessWidget {
       color: Colors.black,
       child: Row(
         children: <Widget>[
-          _MovieListImage(movie.thumbnail),
+          _MovieListImage(movie.thumbnail  != null ? movie.thumbnail : ''),
           SizedBox(
             width: 100,
             child: _MovieListRating(
