@@ -28,7 +28,7 @@ class MovieListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 //TODO: title太長會出框 overflowed
-                Text(movie.name, style: TextStyle(color: Colors.white)),
+                Text(movie.chiName, style: TextStyle(color: Colors.white)),
                 _MovieLikeAndComment(movie.favCount, movie.commentCount),
                 _MovieListDate(movie.openDate)
               ],
