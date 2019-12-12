@@ -34,6 +34,7 @@ class _MovieListState extends State<MovieList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
         title: Text('電影'),
@@ -73,9 +74,15 @@ class _MovieListState extends State<MovieList> {
         });
   }
 
-  Container buildGridView() {
-    return Container(
-
+  GridView buildGridView() {
+    return GridView.count(
+      // 每行三個
+      crossAxisCount: 3,
+      // 長闊比例
+      childAspectRatio: 0.6,
+      children: List.generate(_movieList.length, (index) {
+        return MovieGridItem(_movieList[index]);
+      }),
     );
   }
 }

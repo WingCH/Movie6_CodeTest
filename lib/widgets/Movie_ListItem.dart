@@ -12,29 +12,26 @@ class MovieListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: Row(
-        children: <Widget>[
-          _MovieListImage(movie.thumbnail  != null ? movie.thumbnail : ''),
-          SizedBox(
-            width: 100,
-            child: _MovieListRating(
-                (movie.rating != null ? movie.rating : 0) / 100),
+    return Row(
+      children: <Widget>[
+        _MovieListImage(movie.thumbnail  != null ? movie.thumbnail : ''),
+        SizedBox(
+          width: 100,
+          child: _MovieListRating(
+              (movie.rating != null ? movie.rating : 0) / 100),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              //TODO: title太長會出框 overflowed
+              Text(movie.chiName, style: TextStyle(color: Colors.white)),
+              _MovieLikeAndComment(movie.favCount, movie.commentCount),
+              _MovieListDate(movie.openDate)
+            ],
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                //TODO: title太長會出框 overflowed
-                Text(movie.chiName, style: TextStyle(color: Colors.white)),
-                _MovieLikeAndComment(movie.favCount, movie.commentCount),
-                _MovieListDate(movie.openDate)
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }
