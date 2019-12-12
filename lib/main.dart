@@ -33,25 +33,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('電影'),
-        leading: IconButton(
-          icon: Icon(FontAwesomeIcons.qrcode,
-              color: Theme.of(context).accentColor),
-          onPressed: null,
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search, color: Theme.of(context).accentColor),
-            onPressed: null,
-          ),
-          IconButton(
-            icon: Icon(Icons.border_left, color: Theme.of(context).accentColor),
-            onPressed: null,
-          ),
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         type: BottomNavigationBarType.fixed,
