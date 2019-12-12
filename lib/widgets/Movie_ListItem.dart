@@ -13,7 +13,6 @@ class MovieListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       color: Colors.black,
       child: Row(
         children: <Widget>[
