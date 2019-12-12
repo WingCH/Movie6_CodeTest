@@ -79,7 +79,7 @@ class _MovieListState extends State<MovieList> {
       // 每行三個
       crossAxisCount: 3,
       // 長闊比例
-      childAspectRatio: 0.6,
+      childAspectRatio: 0.5,
       children: List.generate(_movieList.length, (index) {
         return MovieGridItem(_movieList[index]);
       }),
