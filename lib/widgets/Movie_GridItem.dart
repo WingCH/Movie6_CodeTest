@@ -18,7 +18,7 @@ class MovieGridItem extends StatelessWidget {
               child: _MovieGridImage(
                   movie.thumbnail != null ? movie.thumbnail : '')),
           Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.only(right: 5, left: 5, bottom: 3, top:3),
             child: Text(movie.chiName,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: Colors.white, fontSize: 12)),
@@ -56,37 +56,33 @@ class _MovieLikeAndComment extends StatelessWidget {
   final int like;
   final int comment;
 
-  const _MovieLikeAndComment(
-    this.star,
-    this.like,
-    this.comment, {
-    Key key,
-  }) : super(key: key);
+  const _MovieLikeAndComment(this.star,
+      this.like,
+      this.comment, {
+        Key key,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.star,
-                color: Colors.white,
-                size: 10,
-              ),
-              Padding(
-                padding: EdgeInsets.all(2.0),
-              ),
-              Text('$star',
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(253, 220, 11, 1)))
-            ],
-          ),
+        Row(
+          children: <Widget>[
+            Icon(
+              FontAwesomeIcons.star,
+              color: Colors.white,
+              size: 10,
+            ),
+            Padding(
+              padding: EdgeInsets.all(2.0),
+            ),
+            Text('$star',
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
+                    color: Color.fromRGBO(253, 220, 11, 1)))
+          ],
         ),
         Padding(
           padding: const EdgeInsets.all(2.0),
