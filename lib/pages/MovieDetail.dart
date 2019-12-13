@@ -1,3 +1,4 @@
+import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -153,13 +154,23 @@ class MovieDetailContent extends StatelessWidget {
                                     .indexOf('.') +
                                 1) +
                             "級",
-                        style: TextStyle(color: Colors.white))
+                        style: TextStyle(color: Colors.white)),
                   ],
-                )
+                ),
               ],
-            )
+            ),
           ],
-        )
+        ),
+        Padding(
+          padding:
+              const EdgeInsets.only(bottom: 10, top: 10, left: 20, right: 20),
+          child: ExpandText(_movie.chiSynopsis,
+              textAlign: TextAlign.justify,
+              style: TextStyle(color: Colors.white),
+              maxLength: 4,
+              arrowColor: Colors.white),
+        ),
+        
       ],
     );
   }
