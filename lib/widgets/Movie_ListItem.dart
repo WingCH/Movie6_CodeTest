@@ -67,12 +67,15 @@ class _MovieListRating extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: <Widget>[
-          Text(
-            '$rating',
-            style: TextStyle(
+          FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              '$rating',
+              style: TextStyle(
                 fontSize: 40,
-                fontWeight: FontWeight.w600,
-                color: Color.fromRGBO(253, 220, 11, 1)),
+                  fontWeight: FontWeight.w600,
+                  color: Color.fromRGBO(253, 220, 11, 1)),
+            ),
           ),
           RatingBar(
             itemSize: 50 / 5,
