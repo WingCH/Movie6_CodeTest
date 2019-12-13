@@ -7,6 +7,7 @@ import 'package:movie6_code_test/api/movie6_api.dart';
 import 'package:movie6_code_test/models/movies.dart';
 import 'package:movie6_code_test/models/swiperModel.dart';
 import 'package:movie6_code_test/widgets/Component.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieDetail extends StatefulWidget {
   final int movieId;
@@ -74,115 +75,124 @@ class MovieDetailContent extends StatelessWidget {
     }
 
     screenShots.length;
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Container(
-          width: double.infinity,
-          height: 250,
-          child: Swiper(
-              outer: true,
-              onTap: (index) {
-                print("Swiper tap id $index");
-              },
-              itemBuilder: (BuildContext context, int index) {
-                if (screenShots[index].type == SwiperType.image) {
-                  return Image.network(
-                    screenShots[index].screenShotUrl,
-                    fit: BoxFit.cover,
-                  );
-                } else {
-                  return Stack(
-                    children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        child: Image.network(
-                          screenShots[index].screenShotUrl,
-                          fit: BoxFit.cover,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: 250,
+            child: Swiper(
+                outer: true,
+                onTap: (index) async {
+                  if(screenShots[index].type == SwiperType.video){
+                    if (await canLaunch(screenShots[index].url)) {
+                      await launch(screenShots[index].url);
+                    } else {
+                      throw 'Could not launch ${screenShots[index].url}';
+                    }
+                  }
+
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  if (screenShots[index].type == SwiperType.image) {
+                    return Image.network(
+                      screenShots[index].screenShotUrl,
+                      fit: BoxFit.cover,
+                    );
+                  } else {
+                    return Stack(
+                      children: <Widget>[
+                        Container(
+                          width: double.infinity,
+                          child: Image.network(
+                            screenShots[index].screenShotUrl,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      Positioned.fill(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Icon(FontAwesomeIcons.youtube,
-                              size: 80, color: Colors.grey),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Icon(FontAwesomeIcons.youtube,
+                                size: 80, color: Colors.grey),
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                }
-              },
-              itemCount: screenShots.length,
-              pagination: SwiperPagination(
-                builder: DotSwiperPaginationBuilder(
-                    activeColor: Colors.white, color: Colors.grey),
-              )),
-        ),
-        Row(
-          children: <Widget>[
-            SizedBox(width: 100, child: MovieListRating(3.5)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(_movie.chiName,
-                    style: TextStyle(color: Colors.white, fontSize: 15)),
-                MovieLikeAndComment(_movie.favCount, _movie.commentCount),
-                Row(
-                  children: <Widget>[
-                    MovieListDate(_movie.openDate, Colors.white),
-                    Container(
-                      height: 20.0,
-                      width: 1.0,
-                      color: Color.fromRGBO(253, 220, 11, 1),
-                      margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-                    ),
-                    Text(
-                        _movie.infoDict.duration != null
-                            ? _movie.infoDict.duration.toString() + "分鐘"
-                            : ' - ' + "分鐘",
-                        style: TextStyle(color: Colors.white)),
-                    Container(
-                      height: 20.0,
-                      width: 1.0,
-                      color: Color.fromRGBO(253, 220, 11, 1),
-                      margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-                    ),
-                    Text(
-                        _movie.infoDict.category.toString().substring(_movie
-                                    .infoDict.category
-                                    .toString()
-                                    .indexOf('.') +
-                                1) +
-                            "級",
-                        style: TextStyle(color: Colors.white)),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        Padding(
-          padding:
-              const EdgeInsets.only(bottom: 10, top: 10, left: 20, right: 20),
-          child: ExpandText(_movie.chiSynopsis,
-              textAlign: TextAlign.justify,
-              style: TextStyle(color: Colors.white),
-              maxLength: 4,
-              arrowColor: Colors.white),
-        ),
-        Padding(
-          padding:
-              const EdgeInsets.only(bottom: 10, top: 10, left: 20, right: 20),
-          child: Column(
+                      ],
+                    );
+                  }
+                },
+                itemCount: screenShots.length,
+                pagination: SwiperPagination(
+                  builder: DotSwiperPaginationBuilder(
+                      activeColor: Colors.white, color: Colors.grey),
+                )),
+          ),
+          Row(
             children: <Widget>[
-              NameContent('導遊', _movie.chiInfoDict.director),
-              NameContent('演員', _movie.chiInfoDict.actor),
-              NameContent('類型', _movie.chiInfoDict.type),
-              NameContent('語言', _movie.chiInfoDict.language),
+              SizedBox(width: 100, child: MovieListRating(3.5)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(_movie.chiName,
+                      style: TextStyle(color: Colors.white, fontSize: 15)),
+                  MovieLikeAndComment(_movie.favCount, _movie.commentCount),
+                  Row(
+                    children: <Widget>[
+                      MovieListDate(_movie.openDate, Colors.white),
+                      Container(
+                        height: 20.0,
+                        width: 1.0,
+                        color: Color.fromRGBO(253, 220, 11, 1),
+                        margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                      ),
+                      Text(
+                          _movie.infoDict.duration != null
+                              ? _movie.infoDict.duration.toString() + "分鐘"
+                              : ' - ' + "分鐘",
+                          style: TextStyle(color: Colors.white)),
+                      Container(
+                        height: 20.0,
+                        width: 1.0,
+                        color: Color.fromRGBO(253, 220, 11, 1),
+                        margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                      ),
+                      Text(
+                          _movie.infoDict.category.toString().substring(_movie
+                                      .infoDict.category
+                                      .toString()
+                                      .indexOf('.') +
+                                  1) +
+                              "級",
+                          style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
-        )
-      ],
+          Padding(
+            padding:
+                const EdgeInsets.only(bottom: 10, top: 10, left: 20, right: 20),
+            child: ExpandText(_movie.chiSynopsis,
+                textAlign: TextAlign.justify,
+                style: TextStyle(color: Colors.white),
+                maxLength: 4,
+                arrowColor: Colors.white),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(bottom: 10, top: 10, left: 20, right: 20),
+            child: Column(
+              children: <Widget>[
+                NameContent('導遊', _movie.chiInfoDict.director),
+                NameContent('演員', _movie.chiInfoDict.actor),
+                NameContent('類型', _movie.chiInfoDict.type),
+                NameContent('語言', _movie.chiInfoDict.language),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
