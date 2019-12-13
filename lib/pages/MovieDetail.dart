@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movie6_code_test/api/movie6_api.dart';
 import 'package:movie6_code_test/models/movies.dart';
 
@@ -17,10 +18,7 @@ class _MovieDetailState extends State<MovieDetail> {
 
   Future<Movies> getMovieData(_movieId) async {
     var result = await Movie6API().getMovieDetail(_movieId);
-
-    return Future.delayed(Duration(seconds: 4), () => movieFromJson(result));
-
-//    return movieFromJson(result);
+    return movieFromJson(result);
   }
 
   @override
@@ -65,14 +63,30 @@ class MovieDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: RaisedButton(
-        onPressed: () {
-          // Navigate back to first route when tapped.
-          Navigator.pop(context);
-        },
-        child: Text(_movieDetail.name),
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Container(
+          width: double.infinity,
+          height: 250,
+          child: Swiper(
+              outer: true,
+              onTap: (index) {
+                print("Swiper tap id $index");
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return  Image.network(
+                  _movieDetail.screenShots[index],
+                  fit: BoxFit.cover,
+                );
+              },
+              itemCount: _movieDetail.screenShots.length,
+              pagination: SwiperPagination(
+                builder: DotSwiperPaginationBuilder(
+                    activeColor: Colors.white, color: Colors.grey),
+              )),
+        ),
+      ],
     );
   }
 }
