@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.black,
-        accentColor: Colors.white,
+        accentColor: Colors.grey,
       ),
       home: BottomNavigation(),
     );
