@@ -6,8 +6,10 @@
 import 'dart:convert';
 
 List<Movies> moviesFromJson(String str) => List<Movies>.from(json.decode(str).map((x) => Movies.fromJson(x)));
-
 String moviesToJson(List<Movies> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+Movies movieFromJson(String str) => Movies.fromJson(json.decode(str));
+String movieToJson(Movies data) => json.encode(data.toJson());
 
 class Movies {
   int id;
