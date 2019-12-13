@@ -170,7 +170,45 @@ class MovieDetailContent extends StatelessWidget {
               maxLength: 4,
               arrowColor: Colors.white),
         ),
-        
+        Padding(
+          padding:
+              const EdgeInsets.only(bottom: 10, top: 10, left: 20, right: 20),
+          child: Column(
+            children: <Widget>[
+              NameContent('導遊', _movie.chiInfoDict.director),
+              NameContent('演員', _movie.chiInfoDict.actor),
+              NameContent('類型', _movie.chiInfoDict.type),
+              NameContent('語言', _movie.chiInfoDict.language),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class NameContent extends StatelessWidget {
+  NameContent(this.title, this.content);
+
+  final String title;
+  final String content;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+            flex: 1,
+            child: Text(title,
+                style: TextStyle(
+                    color: Colors.grey, fontWeight: FontWeight.w500))),
+        Expanded(
+          flex: 8,
+          child: Text(
+            content,
+            style: TextStyle(color: Colors.white),
+          ),
+        )
       ],
     );
   }
