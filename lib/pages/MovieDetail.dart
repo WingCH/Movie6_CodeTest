@@ -135,7 +135,10 @@ class MovieDetailContent extends StatelessWidget {
                       color: Color.fromRGBO(253, 220, 11, 1),
                       margin: const EdgeInsets.only(left: 5.0, right: 5.0),
                     ),
-                    Text(_movie.infoDict.duration.toString() + "分鐘",
+                    Text(
+                        _movie.infoDict.duration != null
+                            ? _movie.infoDict.duration.toString() + "分鐘"
+                            : ' - ' + "分鐘",
                         style: TextStyle(color: Colors.white)),
                     Container(
                       height: 20.0,
