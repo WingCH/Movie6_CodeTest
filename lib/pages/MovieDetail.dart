@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie6_code_test/api/movie6_api.dart';
 import 'package:movie6_code_test/models/movies.dart';
 import 'package:movie6_code_test/models/swiperModel.dart';
+import 'package:movie6_code_test/widgets/Component.dart';
 
 class MovieDetail extends StatefulWidget {
   final int movieId;
@@ -55,19 +56,19 @@ class MovieDetailContent extends StatelessWidget {
   const MovieDetailContent({
     Key key,
     @required Movies movieDetail,
-  })  : _movieDetail = movieDetail,
+  })  : _movie = movieDetail,
         super(key: key);
 
-  final Movies _movieDetail;
+  final Movies _movie;
 
   @override
   Widget build(BuildContext context) {
     List<SwiperModel> screenShots = List<SwiperModel>();
 
-    for (final youtubeUrl in _movieDetail.multitrailers) {
+    for (final youtubeUrl in _movie.multitrailers) {
       screenShots.add(SwiperModel(youtubeUrl, SwiperType.video));
     }
-    for (final imageUrl in _movieDetail.screenShots) {
+    for (final imageUrl in _movie.screenShots) {
       screenShots.add(SwiperModel(imageUrl, SwiperType.image));
     }
 
@@ -116,6 +117,46 @@ class MovieDetailContent extends StatelessWidget {
                     activeColor: Colors.white, color: Colors.grey),
               )),
         ),
+        Row(
+          children: <Widget>[
+            SizedBox(width: 100, child: MovieListRating(3.5)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(_movie.chiName,
+                    style: TextStyle(color: Colors.white, fontSize: 15)),
+                MovieLikeAndComment(_movie.favCount, _movie.commentCount),
+                Row(
+                  children: <Widget>[
+                    MovieListDate(_movie.openDate, Colors.white),
+                    Container(
+                      height: 20.0,
+                      width: 1.0,
+                      color: Color.fromRGBO(253, 220, 11, 1),
+                      margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                    ),
+                    Text(_movie.infoDict.duration.toString() + "分鐘",
+                        style: TextStyle(color: Colors.white)),
+                    Container(
+                      height: 20.0,
+                      width: 1.0,
+                      color: Color.fromRGBO(253, 220, 11, 1),
+                      margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                    ),
+                    Text(
+                        _movie.infoDict.category.toString().substring(_movie
+                                    .infoDict.category
+                                    .toString()
+                                    .indexOf('.') +
+                                1) +
+                            "級",
+                        style: TextStyle(color: Colors.white))
+                  ],
+                )
+              ],
+            )
+          ],
+        )
       ],
     );
   }
