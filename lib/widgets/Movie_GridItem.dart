@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie6_code_test/models/movies.dart';
+import 'package:movie6_code_test/pages/MovieDetail.dart';
 
 class MovieGridItem extends StatelessWidget {
   final Movies movie;
@@ -10,27 +11,36 @@ class MovieGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(1.0),
-      child: Column(
-        children: <Widget>[
-          Expanded(
-              child: _MovieGridImage(
-                  movie.thumbnail != null ? movie.thumbnail : '')),
-          Padding(
-            padding: const EdgeInsets.only(right: 5, left: 5, bottom: 3, top:3),
-            child: Text(movie.chiName,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Colors.white, fontSize: 12)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(3),
-            child: _MovieLikeAndComment(
-                (movie.rating != null ? movie.rating : 0) / 100,
-                movie.favCount,
-                movie.commentCount),
-          ),
-        ],
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MovieDetail(movie.id)),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(1.0),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: _MovieGridImage(
+                    movie.thumbnail != null ? movie.thumbnail : '')),
+            Padding(
+              padding: const EdgeInsets.only(right: 5, left: 5, bottom: 3, top:3),
+              child: Text(movie.chiName,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Colors.white, fontSize: 12)),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(3),
+              child: _MovieLikeAndComment(
+                  (movie.rating != null ? movie.rating : 0) / 100,
+                  movie.favCount,
+                  movie.commentCount),
+            ),
+          ],
+        ),
       ),
     );
   }
