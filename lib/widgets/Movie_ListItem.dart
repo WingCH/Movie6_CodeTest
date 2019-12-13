@@ -38,7 +38,7 @@ class MovieListItem extends StatelessWidget {
               children: <Widget>[
                 //TODO: title太長會出框 overflowed
                 Text(movie.chiName, style: TextStyle(color: Colors.white)),
-                _MovieLikeAndComment(movie.favCount, movie.commentCount),
+                MovieLikeAndComment(movie.favCount, movie.commentCount),
                 _MovieListDate(movie.openDate)
               ],
             ),
@@ -63,65 +63,6 @@ class _MovieListImage extends StatelessWidget {
           alignment: Alignment.center,
           image: NetworkImage(url),
         ));
-  }
-}
-
-class _MovieLikeAndComment extends StatelessWidget {
-  final int like;
-  final int comment;
-
-  const _MovieLikeAndComment(
-    this.like,
-    this.comment, {
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.heart,
-                color: Colors.white,
-                size: 15,
-              ),
-              Padding(
-                padding: EdgeInsets.all(2.0),
-              ),
-              Text('$like',
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(253, 220, 11, 1)))
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.commentAlt,
-                color: Colors.white,
-                size: 15,
-              ),
-              Padding(
-                padding: EdgeInsets.all(2.0),
-              ),
-              Text('$comment',
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(253, 220, 11, 1)))
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }
 
