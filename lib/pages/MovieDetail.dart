@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie6_code_test/api/movie6_api.dart';
 import 'package:movie6_code_test/models/movies.dart';
+import 'package:movie6_code_test/models/swiperModel.dart';
 
 class MovieDetail extends StatefulWidget {
   final int movieId;
@@ -14,8 +16,6 @@ class MovieDetail extends StatefulWidget {
 }
 
 class _MovieDetailState extends State<MovieDetail> {
-  Movies _movieDetail = Movies();
-
   Future<Movies> getMovieData(_movieId) async {
     var result = await Movie6API().getMovieDetail(_movieId);
     return movieFromJson(result);
@@ -24,7 +24,6 @@ class _MovieDetailState extends State<MovieDetail> {
   @override
   void initState() {
     super.initState();
-//    getMovieData(widget.movieId);
   }
 
   @override
@@ -63,6 +62,16 @@ class MovieDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<SwiperModel> screenShots = List<SwiperModel>();
+
+    for (final youtubeUrl in _movieDetail.multitrailers) {
+      screenShots.add(SwiperModel(youtubeUrl, SwiperType.video));
+    }
+    for (final imageUrl in _movieDetail.screenShots) {
+      screenShots.add(SwiperModel(imageUrl, SwiperType.image));
+    }
+
+    screenShots.length;
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
@@ -75,12 +84,33 @@ class MovieDetailContent extends StatelessWidget {
                 print("Swiper tap id $index");
               },
               itemBuilder: (BuildContext context, int index) {
-                return  Image.network(
-                  _movieDetail.screenShots[index],
-                  fit: BoxFit.cover,
-                );
+                if (screenShots[index].type == SwiperType.image) {
+                  return Image.network(
+                    screenShots[index].screenShotUrl,
+                    fit: BoxFit.cover,
+                  );
+                } else {
+                  return Stack(
+                    children: <Widget>[
+                      Container(
+                        width: double.infinity,
+                        child: Image.network(
+                          screenShots[index].screenShotUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned.fill(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Icon(FontAwesomeIcons.youtube,
+                              size: 80, color: Colors.grey),
+                        ),
+                      ),
+                    ],
+                  );
+                }
               },
-              itemCount: _movieDetail.screenShots.length,
+              itemCount: screenShots.length,
               pagination: SwiperPagination(
                 builder: DotSwiperPaginationBuilder(
                     activeColor: Colors.white, color: Colors.grey),
