@@ -36,7 +36,7 @@ class MovieListItem extends StatelessWidget {
                 //TODO: title太長會出框 overflowed
                 Text(movie.chiName, style: TextStyle(color: Colors.white)),
                 MovieLikeAndComment(movie.favCount, movie.commentCount),
-                MovieListDate(movie.openDate)
+                MovieListDate(movie.openDate, Colors.grey)
               ],
             ),
           )

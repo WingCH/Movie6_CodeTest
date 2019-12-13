@@ -8,9 +8,9 @@ class MovieListRating extends StatelessWidget {
   final double rating;
 
   const MovieListRating(
-      this.rating, {
-        Key key,
-      }) : super(key: key);
+    this.rating, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,10 @@ class MovieLikeAndComment extends StatelessWidget {
   final int comment;
 
   const MovieLikeAndComment(
-      this.like,
-      this.comment, {
-        Key key,
-      }) : super(key: key);
+    this.like,
+    this.comment, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -108,11 +108,13 @@ class MovieLikeAndComment extends StatelessWidget {
 
 class MovieListDate extends StatelessWidget {
   final String date;
+  final Color color;
 
   const MovieListDate(
-      this.date, {
-        Key key,
-      }) : super(key: key);
+    this.date,
+    this.color, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +126,7 @@ class MovieListDate extends StatelessWidget {
     return Text(
       '$displayDate',
       style: TextStyle(
-          color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w600),
+          color: color, fontSize: 12, fontWeight: FontWeight.w600),
     );
   }
 }
