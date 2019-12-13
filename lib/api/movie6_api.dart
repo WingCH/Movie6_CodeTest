@@ -1,12 +1,18 @@
 import 'network.dart';
 
 const String base_url = 'https://api.hkmovie6.com/hkm/movies';
-const String getList = '?type=showing';
 
-class Movie6API{
-  //TODO: 中文會亂碼
+class Movie6API {
+  //TODO: add exception
   Future<dynamic> getMovieList() async {
-    Network network = Network('$base_url$getList');
+    String _getList = '?type=showing';
+    Network network = Network('$base_url$_getList');
+    var moviesData = await network.getData();
+    return moviesData;
+  }
+
+  Future<dynamic> getMovieDetail(movieId) async {
+    Network network = Network('$base_url/$movieId');
     var movieData = await network.getData();
     return movieData;
   }
