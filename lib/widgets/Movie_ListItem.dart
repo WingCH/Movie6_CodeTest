@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:movie6_code_test/models/movies.dart';
 import 'package:movie6_code_test/pages/MovieDetail.dart';
 
+import 'Component.dart';
+
 // ignore: camel_case_types
 class MovieListItem extends StatelessWidget {
   final Movies movie;
@@ -27,7 +29,7 @@ class MovieListItem extends StatelessWidget {
           _MovieListImage(movie.thumbnail != null ? movie.thumbnail : ''),
           SizedBox(
             width: 100,
-            child: _MovieListRating(
+            child: MovieListRating(
                 (movie.rating != null ? movie.rating : 0) / 100),
           ),
           Expanded(
@@ -61,49 +63,6 @@ class _MovieListImage extends StatelessWidget {
           alignment: Alignment.center,
           image: NetworkImage(url),
         ));
-  }
-}
-
-class _MovieListRating extends StatelessWidget {
-  final double rating;
-
-  const _MovieListRating(
-    this.rating, {
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: <Widget>[
-          FittedBox(
-            fit: BoxFit.contain,
-            child: Text(
-              '$rating',
-              style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromRGBO(253, 220, 11, 1)),
-            ),
-          ),
-          RatingBar(
-            itemSize: 50 / 5,
-            initialRating: rating,
-            direction: Axis.horizontal,
-            allowHalfRating: true,
-            ignoreGestures: true,
-            itemCount: 5,
-            itemBuilder: (context, _) => Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            onRatingUpdate: (double value) {},
-          )
-        ],
-      ),
-    );
   }
 }
 
