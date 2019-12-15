@@ -8,6 +8,7 @@ import 'package:movie6_code_test/models/movies.dart';
 import 'package:movie6_code_test/models/swiperModel.dart';
 import 'package:movie6_code_test/widgets/Component.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class MovieDetail extends StatefulWidget {
   final int movieId;
@@ -83,16 +84,15 @@ class MovieDetailContent extends StatelessWidget {
             width: double.infinity,
             height: 250,
             child: Swiper(
-                outer: true,
+//                outer: true,
                 onTap: (index) async {
-                  if(screenShots[index].type == SwiperType.video){
+                  if (screenShots[index].type == SwiperType.video) {
                     if (await canLaunch(screenShots[index].url)) {
                       await launch(screenShots[index].url);
                     } else {
                       throw 'Could not launch ${screenShots[index].url}';
                     }
                   }
-
                 },
                 itemBuilder: (BuildContext context, int index) {
                   if (screenShots[index].type == SwiperType.image) {
@@ -101,6 +101,13 @@ class MovieDetailContent extends StatelessWidget {
                       fit: BoxFit.cover,
                     );
                   } else {
+//                    return  Container(
+//                      width: double.infinity,
+//                        child: WebView(
+//
+//                          initialUrl: Uri.dataFromString('<iframe width="100%" height="100%"  src="https://www.youtube.com/embed/kTIEM2uyrcA" frameborder="0" allowfullscreen></iframe>', mimeType: 'text/html').toString(),
+//                          javascriptMode: JavascriptMode.unrestricted,
+//                        ));
                     return Stack(
                       children: <Widget>[
                         Container(
