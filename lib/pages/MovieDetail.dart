@@ -192,8 +192,8 @@ class MovieDetailContent extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 NameContent('導遊', _movie.chiInfoDict.director),
-                NameContent('演員', _movie.chiInfoDict.actor),
-                NameContent('類型', _movie.chiInfoDict.type),
+                NameContent('演員', _movie.chiInfoDict.cast),
+                NameContent('類型', _movie.chiInfoDict.genre),
                 NameContent('語言', _movie.chiInfoDict.language),
               ],
             ),

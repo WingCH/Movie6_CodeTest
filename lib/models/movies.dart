@@ -188,38 +188,38 @@ class Movies {
 }
 
 class ChiInfoDict {
-  String actor;
+  String cast;
+  Empty category;
   String language;
-  Empty grade;
   String director;
-  String length;
-  String type;
+  String duration;
+  String genre;
 
   ChiInfoDict({
-    this.actor,
+    this.cast,
+    this.category,
     this.language,
-    this.grade,
     this.director,
-    this.length,
-    this.type,
+    this.duration,
+    this.genre,
   });
 
   factory ChiInfoDict.fromJson(Map<String, dynamic> json) => ChiInfoDict(
-    actor: json["演員"] == null ? null : json["演員"],
+    cast: json["演員"] == null ? null : json["演員"],
+    category: json["級別"] == null ? null : emptyValues.map[json["級別"]],
     language: json["語言"] == null ? null : json["語言"],
-    grade: json["級別"] == null ? null : emptyValues.map[json["級別"]],
     director: json["導演"] == null ? null : json["導演"],
-    length: json["片長"] == null ? null : json["片長"],
-    type: json["類型"] == null ? null : json["類型"],
+    duration: json["片長"] == null ? null : json["片長"],
+    genre: json["類型"] == null ? null : json["類型"],
   );
 
   Map<String, dynamic> toJson() => {
-    "演員": actor == null ? null : actor,
+    "演員": cast == null ? null : cast,
+    "級別": category == null ? null : emptyValues.reverse[category],
     "語言": language == null ? null : language,
-    "級別": grade == null ? null : emptyValues.reverse[grade],
     "導演": director == null ? null : director,
-    "片長": length == null ? null : length,
-    "類型": type == null ? null : type,
+    "片長": duration == null ? null : duration,
+    "類型": genre == null ? null : genre,
   };
 }
 
