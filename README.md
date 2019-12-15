@@ -8,10 +8,10 @@ According to requirements, I need to complete three views
 
 | Movie List (Grid) | Movie List (List)  |  Movie List (Movie Detail) |
 |---|---|---|
-| ![-](./media/15763788539941.jpg)| ![](./media/15763788656023.jpg)|  ![](./media/15763788746730.jpg)|
+| ![Imgur](https://i.imgur.com/wLLrI96.png)| ![Imgur](https://i.imgur.com/8dLgRCL.png)|  ![Imgur](https://i.imgur.com/F9SePYU.png)|
 
 ## Site Map
-![flo](./media/flow.png)
+![Imgur](https://i.imgur.com/tM0FFYX.png)
 
 
 1. The outermost layer is `BottomNavigation` which is `UITabBarController` in iOS.
@@ -55,7 +55,7 @@ Because this is my first time using flutter, so I just use the simplest and orig
 
 API return information is more complicated, I do n’t want to enter it manually and there are keys using **Chinese** characters.
 
-![-w839](media/15764007977557.jpg)
+![Imgur](https://i.imgur.com/XqZCHi6.png)
 
 #### Solution
 
@@ -67,8 +67,8 @@ I have tried mainstream solution like [json_serializable](https://flutter.dev/do
 
 I finally found [Paste JSON as Code • quicktype](https://apps.apple.com/hk/app/paste-json-as-code-quicktype/id1330801220?mt=12), it solve the above problems well, i only need modify chinese key to english.
 
-![-w597](./media/15764024418998.jpg)
-![-w424](./media/15764024503228.jpg)
+![Imgur](https://i.imgur.com/dcd0V1h.png)
+![Imgur](https://i.imgur.com/6mGlHaI.png)
 
 
 -------
@@ -77,7 +77,7 @@ I finally found [Paste JSON as Code • quicktype](https://apps.apple.com/hk/app
 
 Top of  Movie detail page, i need show video thumbnail and image in swiper.
 In API result image url is `screenShots`, video is `multitrailers`
-![-w1031](./media/15764032357875.jpg)
+![Imgur](https://i.imgur.com/Zn15R0E.png)
 
 So, i need use `multitrailers` youtube url get video thumbnail.
 
@@ -95,8 +95,8 @@ I using Regex to extract the `youtube id`
 
 ## Screenshot
 
-![IMG_8677](media/IMG_8677.jpeg)
+![Imgur](https://i.imgur.com/ONnU0p5.jpg)
 
 ## Demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4nuEnG_67WM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=4nuEnG_67WM
